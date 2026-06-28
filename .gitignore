@@ -1,0 +1,11 @@
+# secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# dependencies / build
+node_modules/
+.vercel/
+
+# editor / tooling
+.claude/

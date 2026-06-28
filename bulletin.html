@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bulletin Archive — Department of Surrender</title>
+<meta name="description" content="The Monthly Compliance Bulletin · public archive." />
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Special+Elite&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="subpage.css">
+<style>
+  .empty {
+    margin-top: 36px;
+    border: 1px dashed var(--ink-faint);
+    background: var(--paper-deep);
+    padding: 36px;
+    text-align: center;
+    position: relative;
+  }
+  .empty .pending-stamp {
+    display: inline-block;
+    border: 2px solid var(--stamp);
+    color: var(--stamp);
+    padding: 6px 14px;
+    font-family: 'Special Elite', monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    transform: rotate(-3deg);
+    margin-bottom: 20px;
+  }
+  .empty p {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto 12px;
+  }
+  .schedule {
+    margin-top: 36px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    padding: 20px 22px;
+  }
+  .schedule h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .schedule ol { list-style: none; margin: 0; padding: 0; }
+  .schedule li {
+    display: grid;
+    grid-template-columns: 110px 100px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    align-items: baseline;
+  }
+  .schedule li:last-child { border-bottom: 0; }
+  .schedule .iss { color: var(--ink); letter-spacing: 0.04em; }
+  .schedule .date { color: var(--ink-soft); }
+  .schedule .title { font-family: 'Newsreader', serif; font-style: italic; font-size: 14px; color: var(--ink); }
+  .schedule .pending {
+    display: inline-block;
+    background: var(--stamp);
+    color: var(--paper);
+    padding: 1px 6px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="alert-bar">
+  <span class="chev">▲</span>
+  <span>SECTION 04 · MONTHLY COMPLIANCE BULLETIN · PUBLIC ARCHIVE</span>
+  <span class="chev">▲</span>
+</div>
+
+<header class="masthead">
+  <a href="/">DEPARTMENT OF SURRENDER</a>
+  <div class="masthead__office">OFFICE OF FORTHCOMING TRANSMISSIONS</div>
+  <div class="masthead__file">FILE NO. <b>0014-B</b> · <b id="today">2026.05.15</b></div>
+</header>
+
+<main>
+  <div class="frame">
+
+    <div class="doc-head">
+      <p class="label">Form 04-A · Bulletin Index</p>
+      <h1>Bulletin<br>Archive.</h1>
+      <p class="lede">The Monthly Compliance Bulletin is issued on the first of each month at 09:00 (Department time, UTC). Past issues will be filed here as they are released.</p>
+      <div class="meta">
+        <span><b>CADENCE</b> MONTHLY · 1ST · 09:00 UTC</span>
+        <span><b>OFFICER</b> PEMBERTON</span>
+      </div>
+    </div>
+
+    <div class="prose">
+
+      <div class="empty">
+        <div class="pending-stamp">FIRST TRANSMISSION PENDING</div>
+        <p>The inaugural issue, <b>Bulletin No. 001 — Supervised Joy is now in effect</b>, has not yet been broadcast. It will appear here automatically after delivery.</p>
+        <p>If you would like to receive it the moment it goes out, return to the front and enlist.</p>
+      </div>
+
+      <div class="schedule">
+        <h3>Forthcoming Transmissions</h3>
+        <ol>
+          <li><span class="iss">No. 001</span><span class="date">2026.06.01</span><span class="title">Supervised Joy is now in effect <span class="pending">scheduled</span></span></li>
+          <li><span class="iss">No. 002</span><span class="date">2026.07.01</span><span class="title">Approved Wistfulness · field notes <span class="pending">scheduled</span></span></li>
+          <li><span class="iss">No. 003</span><span class="date">2026.08.01</span><span class="title">A brief word from the Bird <span class="pending">scheduled</span></span></li>
+        </ol>
+      </div>
+
+    </div>
+
+    <a href="/" class="back">← Return to Processing</a>
+
+  </div>
+</main>
+
+<div class="classified">
+  <span>CLASSIFIED — FOR ENLISTED CITIZENS ONLY</span>
+  <span class="center">▲ THE DEPARTMENT DOES NOT SPAM. THE DEPARTMENT SUMMONS. ▲</span>
+  <span>PAGE 1 OF 1</span>
+</div>
+
+<script>
+  const d = new Date();
+  document.getElementById("today").textContent =
+    d.getFullYear() + "." + String(d.getMonth()+1).padStart(2,"0") + "." + String(d.getDate()).padStart(2,"0");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Department of Surrender — You Are Free</title>
+<meta name="description" content="An official non-agency of an unofficial non-government. Enlist now." />
+<meta property="og:title" content="Department of Surrender — You Are Free" />
+<meta property="og:description" content="An official non-agency of an unofficial non-government. Enlist now." />
+<meta property="og:image" content="https://departmentofsurrender.com/og-image.png" />
+<meta property="og:url" content="https://departmentofsurrender.com" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Department of Surrender — You Are Free" />
+<meta name="twitter:description" content="An official non-agency of an unofficial non-government. Enlist now." />
+<meta name="twitter:image" content="https://departmentofsurrender.com/og-image.png" />
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Special+Elite&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ─────────────────────────────────────────────────────
+     DEPARTMENT OF SURRENDER · stylesheet
+     File no. 0014-A · classified — for enlisted citizens only
+  ───────────────────────────────────────────────────── */
+
+  :root {
+    --paper:        #efe7d6;
+    --paper-deep:   #e6dcc4;
+    --paper-shade:  #d8ccae;
+    --ink:          #1a1612;
+    --ink-soft:     #4a3f33;
+    --ink-faint:    #8a7d68;
+    --rule:         #c8b88c;
+    --stamp:        #b21f2c;
+    --stamp-deep:   #8c1620;
+    --black-bar:    #0a0907;
+    --redaction:    #161311;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    font-weight: 400;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* paper grain overlay — subtle texture, not a parlor trick */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.045;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  /* horizontal scan lines, very faint */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1001;
+    opacity: 0.025;
+    background-image: repeating-linear-gradient(
+      0deg, transparent 0, transparent 3px, var(--ink) 3px, var(--ink) 4px
+    );
+  }
+
+  /* ─── typography ─── */
+
+  .display {
+    font-family: 'Special Elite', 'Courier Prime', monospace;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ─── notification bar (top) ─── */
+
+  .alert-bar {
+    position: relative;
+    z-index: 100;
+    background: var(--black-bar);
+    color: var(--paper);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid #000;
+  }
+
+  .alert-bar__track {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: opacity 300ms ease;
+  }
+
+  .alert-bar__chev {
+    color: var(--stamp);
+    font-size: 9px;
+    transform: translateY(-1px);
+  }
+
+  .alert-bar.is-fading .alert-bar__track { opacity: 0; }
+
+  /* ─── masthead ─── */
+
+  .masthead {
+    border-bottom: 1px solid var(--ink);
+    padding: 14px 36px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    background: var(--paper);
+  }
+
+  .masthead__brand {
+    font-family: 'Special Elite', monospace;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  .masthead__office {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .masthead__file {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+
+  .masthead__file b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ─── shared section frame ─── */
+
+  .frame {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 36px;
+    position: relative;
+  }
+
+  .section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .section__no {
+    position: absolute;
+    top: 24px;
+    left: 36px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+  }
+
+  .section__no::after {
+    content: "";
+    display: inline-block;
+    width: 56px;
+    height: 1px;
+    background: var(--ink-faint);
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+
+  /* ─── hero ─── */
+
+  .hero {
+    padding: 56px 0 72px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  .hero__copy {
+    position: relative;
+  }
+
+  .hero__eyebrow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .hero__eyebrow span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .hero__eyebrow .pip {
+    width: 6px;
+    height: 6px;
+    background: var(--stamp);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .hero__title {
+    font-family: 'Special Elite', monospace;
+    font-size: clamp(72px, 11vw, 168px);
+    line-height: 0.86;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  .hero__title span {
+    display: block;
+  }
+
+  .hero__title .ya { animation: heroIn 700ms 0ms both; }
+  .hero__title .re { animation: heroIn 700ms 80ms both; }
+  .hero__title .ee { animation: heroIn 700ms 160ms both; }
+
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .hero__brand {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    animation: heroIn 700ms 280ms both;
+  }
+
+  .hero__sub {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-faint);
+    margin-bottom: 32px;
+    max-width: 460px;
+    animation: heroIn 700ms 360ms both;
+  }
+
+  .hero__meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    animation: heroIn 700ms 440ms both;
+  }
+
+  .hero__meta b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* flamingo column */
+
+  .hero__plate {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background: var(--paper-deep);
+    border: 1px solid var(--ink);
+    padding: 16px;
+    box-shadow:
+      0 1px 0 var(--paper) inset,
+      6px 8px 0 var(--paper-shade);
+  }
+
+  .hero__plate::before {
+    content: "FIG. 1 — APPROVED LIKENESS";
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: var(--paper);
+    padding: 0 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+  }
+
+  .hero__plate__inner {
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    border: 1px dashed var(--ink-faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero__plate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.05) saturate(1.05);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  /* fallback when no image is dropped in */
+  .hero__plate__placeholder {
+    text-align: center;
+    padding: 40px;
+    color: var(--ink-faint);
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+  }
+
+  .hero__plate__placeholder b {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  /* approved stamp on the plate */
+  .stamp {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 104px;
+    height: 104px;
+    border: 3px solid var(--stamp);
+    border-radius: 50%;
+    transform: rotate(-12deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--stamp);
+    font-family: 'Special Elite', monospace;
+    text-align: center;
+    line-height: 1;
+    opacity: 0.86;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .stamp::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--stamp);
+    border-radius: 50%;
+  }
+
+  .stamp__top {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+  }
+
+  .stamp__big {
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .stamp__date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+
+  /* ─── manifesto ─── */
+
+  .manifesto {
+    background: var(--paper);
+  }
+
+  .manifesto__title {
+    font-family: 'Special Elite', monospace;
+    font-size: 42px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .manifesto__rule {
+    height: 6px;
+    background:
+      repeating-linear-gradient(90deg, var(--ink) 0 12px, transparent 12px 18px);
+    margin: 22px 0 36px;
+  }
+
+  .manifesto__body {
+    columns: 2;
+    column-gap: 56px;
+    font-family: 'Newsreader', serif;
+    font-size: 19px;
+    line-height: 1.62;
+    color: var(--ink);
+    max-width: 920px;
+  }
+
+  .manifesto__body p {
+    margin-bottom: 18px;
+    break-inside: avoid;
+  }
+
+  .manifesto__body p:first-of-type::first-letter {
+    font-family: 'Special Elite', monospace;
+    font-size: 64px;
+    line-height: 0.85;
+    float: left;
+    margin: 6px 10px 0 0;
+    color: var(--stamp);
+  }
+
+  .manifesto__body em {
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .manifesto__sig {
+    margin-top: 36px;
+    display: flex;
+    align-items: flex-end;
+    gap: 36px;
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+  }
+
+  .manifesto__sig__line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .manifesto__sig__line b { color: var(--ink); font-weight: 500; }
+
+  .manifesto__scribble {
+    font-family: 'Special Elite', monospace;
+    font-size: 24px;
+    color: var(--stamp);
+    transform: rotate(-4deg) translateY(-4px);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── enlistment form ─── */
+
+  .enlist {
+    background: var(--paper-deep);
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .enlist__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+
+  .form-no {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .form-no::before, .form-no::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--ink-soft);
+    max-width: 120px;
+  }
+
+  .enlist__title {
+    font-family: 'Special Elite', monospace;
+    font-size: 38px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+    line-height: 1.05;
+  }
+
+  .enlist__lede {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 0 auto 36px;
+    line-height: 1.55;
+  }
+
+  .enlist-form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 540px;
+    margin: 0 auto;
+    gap: 14px;
+  }
+
+  .enlist-row {
+    display: flex;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  .enlist-row input[type="email"] {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 18px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+
+  .enlist-row input::placeholder {
+    color: var(--ink-faint);
+  }
+
+  .enlist-row button {
+    border: 0;
+    border-left: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 26px;
+    font-family: 'Special Elite', monospace;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 120ms ease;
+  }
+
+  .enlist-row button:hover { background: var(--stamp); }
+  .enlist-row button:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+
+  /* honeypot */
+  .honey { position: absolute; left: -9999px; top: -9999px; }
+
+  .enlist__consent {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  .enlist__consent a { color: var(--ink-soft); text-decoration: underline; }
+
+  /* success state */
+  .enlist__success {
+    display: none;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    padding: 28px 32px;
+    text-align: left;
+    position: relative;
+    margin-top: 8px;
+  }
+
+  .enlist__success.is-active { display: block; animation: heroIn 400ms ease both; }
+
+  .enlist__success__row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .enlist__success__row:last-child { border-bottom: 0; }
+
+  .enlist__success__row .k {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  .enlist__success__row .v {
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+
+  .enlist__success__stamp {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border: 2px solid var(--stamp);
+    color: var(--stamp);
+    padding: 6px 12px;
+    font-family: 'Special Elite', monospace;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    transform: rotate(-6deg);
+  }
+
+  /* ─── frequently submitted questions ─── */
+
+  .fsq__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 36px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .fsq__title {
+    font-family: 'Special Elite', monospace;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .fsq__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .fsq__item {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 24px 24px 26px;
+    position: relative;
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+
+  .fsq__item:hover {
+    border-color: var(--ink);
+    transform: translate(-1px, -1px);
+  }
+
+  .fsq__item__no {
+    position: absolute;
+    top: -9px;
+    left: 22px;
+    background: var(--paper);
+    padding: 0 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+  }
+
+  .fsq__item__q {
+    font-family: 'Special Elite', monospace;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--ink);
+    line-height: 1.25;
+    min-height: 64px;
+  }
+
+  .fsq__item__a {
+    font-family: 'Newsreader', serif;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* ─── process strip ─── */
+
+  .strip__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+  }
+
+  .strip__title {
+    font-family: 'Special Elite', monospace;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .strip__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .strip__item {
+    border: 1px solid var(--ink);
+    padding: 14px;
+    background: var(--paper);
+  }
+
+  .strip__img {
+    aspect-ratio: 4/3;
+    background: var(--paper-deep);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--ink-faint);
+  }
+
+  .strip__img__inner {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 350ms ease, transform 600ms ease;
+  }
+
+  .strip__item:hover .strip__img__inner {
+    filter: grayscale(0) contrast(1);
+    transform: scale(1.02);
+  }
+
+  /* svg-derived placeholder backgrounds — bureaucratic abstract */
+  .strip__img--1 .strip__img__inner {
+    background:
+      repeating-linear-gradient(45deg, var(--ink-faint) 0 2px, transparent 2px 14px),
+      linear-gradient(135deg, #c4b18a 0%, #9d8a64 100%);
+  }
+  .strip__img--2 .strip__img__inner {
+    background:
+      radial-gradient(circle at 30% 40%, var(--stamp) 0 12px, transparent 13px),
+      radial-gradient(circle at 70% 70%, var(--ink) 0 8px, transparent 9px),
+      linear-gradient(180deg, #d6c8a4 0%, #b9a878 100%);
+  }
+  .strip__img--3 .strip__img__inner {
+    background:
+      repeating-linear-gradient(0deg, var(--ink) 0 1px, transparent 1px 6px),
+      linear-gradient(180deg, #cdbe96 0%, #a7976e 100%);
+  }
+
+  .strip__cap {
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .strip__cap__redact {
+    background: var(--redaction);
+    color: var(--redaction);
+    padding: 0 12px;
+    user-select: none;
+  }
+
+  /* ─── bulletin teaser ─── */
+
+  .bulletin {
+    background: var(--paper-deep);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 72px 0;
+  }
+
+  .bulletin__wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .bulletin__envelope {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 26px;
+    box-shadow: 6px 6px 0 var(--paper-shade);
+    position: relative;
+  }
+
+  .bulletin__envelope__bar {
+    height: 26px;
+    background:
+      repeating-linear-gradient(45deg, var(--ink) 0 8px, var(--paper) 8px 16px);
+    margin: -26px -26px 22px;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .bulletin__envelope h4 {
+    font-family: 'Special Elite', monospace;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .bulletin__envelope__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .bulletin__envelope__row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--ink-faint);
+  }
+
+  .bulletin__envelope__row .k { color: var(--ink-faint); }
+  .bulletin__envelope__row .v { color: var(--ink); }
+
+  .bulletin h3 {
+    font-family: 'Special Elite', monospace;
+    font-size: 44px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .bulletin h3 em {
+    font-style: italic;
+    color: var(--stamp);
+  }
+
+  .bulletin p {
+    font-family: 'Newsreader', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    max-width: 540px;
+  }
+
+  .bulletin__list {
+    list-style: none;
+    margin-top: 20px;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+  }
+
+  .bulletin__list li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--rule);
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    color: var(--ink);
+    align-items: baseline;
+  }
+
+  .bulletin__list li::before {
+    content: "§";
+    font-family: 'Special Elite', monospace;
+    color: var(--stamp);
+    font-size: 18px;
+  }
+
+  /* ─── footer ─── */
+
+  .foot {
+    background: var(--paper);
+    padding: 60px 0 24px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .foot__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    gap: 36px;
+    margin-bottom: 50px;
+  }
+
+  .foot__brand {
+    font-family: 'Special Elite', monospace;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+
+  .foot__tag {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 260px;
+  }
+
+  .foot h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+
+  .foot ul { list-style: none; }
+  .foot li { margin-bottom: 8px; }
+
+  .foot a {
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms ease, color 120ms ease;
+  }
+
+  .foot a:hover {
+    color: var(--stamp);
+    border-bottom-color: var(--stamp);
+  }
+
+  .foot__bottom {
+    border-top: 1px solid var(--ink);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .foot__copy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .foot__motto {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+
+  /* ─── classification bar (bottom) ─── */
+
+  .classified {
+    background: var(--black-bar);
+    color: var(--paper);
+    padding: 12px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .classified__center {
+    color: var(--stamp);
+  }
+
+  /* ─── classified pill (sticky) ─── */
+
+  .pill {
+    position: fixed;
+    bottom: 60px;
+    right: 24px;
+    z-index: 200;
+    display: flex;
+    align-items: stretch;
+    background: var(--stamp);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    cursor: default;
+    transform: rotate(-1.5deg);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+    animation: pillIn 600ms 1400ms both;
+  }
+
+  .pill:hover {
+    transform: rotate(-1.5deg) translate(-1px, -1px);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  @keyframes pillIn {
+    from { opacity: 0; transform: rotate(-1.5deg) translateY(20px); }
+    to   { opacity: 1; transform: rotate(-1.5deg); }
+  }
+
+  .pill__btn {
+    background: transparent;
+    color: inherit;
+    border: 0;
+    padding: 12px 18px 12px 16px;
+    font-family: 'Special Elite', monospace;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .pill__btn:hover { background: var(--stamp-deep); }
+
+  .pill__close {
+    background: var(--stamp-deep);
+    color: var(--paper);
+    border: 0;
+    border-left: 1px solid var(--ink);
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .pill__close:hover { background: var(--ink); }
+  .pill.is-hidden { display: none; }
+
+  /* ─── modal · classified dossier ─── */
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 9, 7, 0.78);
+    z-index: 500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(2px);
+  }
+
+  .modal.is-open { display: flex; animation: modalIn 200ms ease both; }
+  @keyframes modalIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .dossier {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    max-width: 540px;
+    width: 100%;
+    position: relative;
+    box-shadow: 12px 12px 0 var(--paper-shade);
+    animation: dossierIn 320ms cubic-bezier(.2,.7,.3,1) both;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  @keyframes dossierIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .dossier__bar {
+    height: 28px;
+    background: repeating-linear-gradient(45deg, var(--ink) 0 8px, var(--paper) 8px 16px);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .dossier__close {
+    position: absolute;
+    top: 36px;
+    right: 12px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    width: 28px;
+    height: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    z-index: 5;
+    line-height: 1;
+  }
+
+  .dossier__close:hover { background: var(--stamp); color: var(--paper); }
+
+  .dossier__inner { padding: 24px 28px 28px; }
+
+  .dossier__head {
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+  }
+
+  .dossier__no {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  .dossier__title {
+    font-family: 'Special Elite', monospace;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 6px;
+    line-height: 1.05;
+  }
+
+  .dossier__lede {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .dossier-form .enlist-row { box-shadow: 3px 3px 0 var(--ink); }
+  .dossier-form .enlist-row input[type="email"] { padding: 14px 18px; font-size: 13px; }
+  .dossier-form .enlist-row button { padding: 0 22px; font-size: 13px; }
+
+  .dossier__readout { display: none; }
+  .dossier__readout.is-active { display: block; animation: heroIn 380ms ease both; }
+
+  .dossier__row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 14px;
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    align-items: baseline;
+  }
+
+  .dossier__row .k {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  .dossier__row .v {
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    font-size: 13px;
+  }
+
+  .dossier__row .v em {
+    color: var(--stamp);
+    font-style: normal;
+    font-family: 'Special Elite', monospace;
+    letter-spacing: 0.06em;
+  }
+
+  .dossier__row .redact {
+    background: var(--redaction);
+    color: var(--redaction);
+    padding: 0 6px;
+    user-select: none;
+  }
+
+  .dossier__intercept {
+    background: var(--paper-deep);
+    border: 1px solid var(--ink-faint);
+    padding: 16px 18px;
+    margin-top: 18px;
+    font-family: 'Special Elite', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    position: relative;
+  }
+
+  .dossier__intercept::before {
+    content: "INTERCEPTED · 2026";
+    position: absolute;
+    top: -8px;
+    left: 14px;
+    background: var(--paper);
+    padding: 0 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--ink-faint);
+  }
+
+  .dossier__assignment {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border: 2px solid var(--ink);
+    background: var(--paper-deep);
+  }
+
+  .dossier__assignment__lab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--stamp);
+    text-transform: uppercase;
+  }
+
+  .dossier__assignment__task {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  .dossier__stamp {
+    position: absolute;
+    bottom: 22px;
+    right: 22px;
+    border: 2px solid var(--stamp);
+    color: var(--stamp);
+    padding: 6px 12px;
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    transform: rotate(-8deg);
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .dossier__stamp.is-active { opacity: 0.9; animation: heroIn 500ms 200ms both; }
+
+  /* ─── responsive ─── */
+
+  @media (max-width: 980px) {
+    .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero__plate { max-width: 460px; margin: 0 auto; aspect-ratio: 3/4; }
+    .manifesto__body { columns: 1; }
+    .fsq__grid { grid-template-columns: 1fr 1fr; }
+    .strip__grid { grid-template-columns: 1fr 1fr; }
+    .bulletin__wrap { grid-template-columns: 1fr; }
+    .foot__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .pill { bottom: 50px; right: 12px; }
+    .pill__btn { padding: 10px 12px; font-size: 11px; letter-spacing: 0.14em; }
+    .pill__close { padding: 0 10px; }
+    .dossier__title { font-size: 22px; }
+    .dossier__row { grid-template-columns: 100px 1fr; gap: 10px; font-size: 11px; }
+    .dossier__inner { padding: 20px 20px 24px; }
+    body { font-size: 16px; }
+    .frame { padding: 0 22px; }
+    .masthead { padding: 12px 22px; grid-template-columns: 1fr; text-align: left; gap: 4px; }
+    .masthead__office, .masthead__file { text-align: left; }
+    .section { padding: 56px 0; }
+    .hero__title { font-size: clamp(56px, 16vw, 92px); }
+    .manifesto__title, .enlist__title, .fsq__title, .strip__title { font-size: 28px; }
+    .bulletin h3 { font-size: 32px; }
+    .fsq__grid, .strip__grid { grid-template-columns: 1fr; }
+    .foot__grid { grid-template-columns: 1fr; }
+    .classified { flex-direction: column; gap: 6px; padding: 12px 22px; text-align: center; }
+    .alert-bar__track { font-size: 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* ─── skip link ─── */
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    z-index: 9999;
+  }
+
+  .skip:focus { left: 12px; top: 12px; }
+
+  ::selection { background: var(--stamp); color: var(--paper); }
+
+</style>
+</head>
+<body>
+
+<a href="#enlist" class="skip">Skip to enlistment</a>
+
+<!-- ═══════════════════════════════════════════════════
+     TOP NOTIFICATION BAR
+═══════════════════════════════════════════════════ -->
+<div class="alert-bar" role="status" aria-live="polite" id="alert-bar">
+  <div class="alert-bar__track">
+    <span class="alert-bar__chev">▲</span>
+    <span id="alert-text">NATIONAL THREAT LEVEL: MILD INCONVENIENCE</span>
+    <span class="alert-bar__chev">▲</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MASTHEAD
+═══════════════════════════════════════════════════ -->
+<header class="masthead">
+  <div class="masthead__brand">DEPARTMENT OF SURRENDER</div>
+  <div class="masthead__office" id="office-name">OFFICE OF CIVILIAN PROCESSING</div>
+  <div class="masthead__file">
+    FILE NO. <b id="file-no">0014-A</b> · <b id="today">2026.05.15</b>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="frame">
+    <div class="hero__grid">
+
+      <div class="hero__copy">
+        <div class="hero__eyebrow">
+          <span class="pip"></span>
+          <span>Form 1.0 — General Address to the Citizenry</span>
+        </div>
+
+        <h1 class="hero__title">
+          <span class="ya">YOU</span>
+          <span class="re">ARE</span>
+          <span class="ee">FREE</span>
+        </h1>
+
+        <p class="hero__brand">Department of Surrender</p>
+        <p class="hero__sub">An official non-agency of an unofficial non-government, established to assist citizens in the orderly relinquishment of attention, opinion, and free time.</p>
+
+        <div class="hero__meta">
+          <span><b>EST.</b> 2026</span>
+          <span><b>ENLISTMENT</b> PENDING</span>
+          <span><b>APPROVED</b> BY THE BIRD</span>
+        </div>
+      </div>
+
+      <div class="hero__plate">
+        <div class="hero__plate__inner">
+          <!-- Replace src with the actual flamingo asset when available -->
+          <img src="flamingo-hero.png" alt="Department mascot: a pink flamingo wearing a tricorn hat and gas mask above the words YOU ARE FREE." onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <div class="hero__plate__placeholder" style="display:none">
+            <b>Fig. 1</b>
+            Pink flamingo. Tricorn hat. Standard-issue gas mask. Wooden post. Sky.<br><br>
+            <em>The Bird is on its way.</em>
+          </div>
+        </div>
+        <div class="stamp" aria-hidden="true">
+          <div class="stamp__top">DEPT · OF</div>
+          <div class="stamp__big">APPROVED</div>
+          <div class="stamp__date">RECEIVED 2026.05.15</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     MANIFESTO
+═══════════════════════════════════════════════════ -->
+<section class="section manifesto">
+  <div class="section__no">§ 02 / MANIFESTO</div>
+  <div class="frame">
+    <p class="label">Public Notice</p>
+    <h2 class="manifesto__title">A Brief Word from the&nbsp;Department.</h2>
+    <div class="manifesto__rule"></div>
+
+    <div class="manifesto__body">
+      <p>The Department of Surrender is pleased to confirm that everything is going extremely well. You may have noticed a slight unease in recent years. A faint hum. A feeling of being slowly digested by your own phone. <em>These sensations are normal and have been factored into the budget.</em></p>
+
+      <p>Our mission is simple: to help citizens release the unbearable weight of having opinions, attention spans, and free time. We do this with grace, with paperwork, and with the quiet authority of an institution that does not technically exist.</p>
+
+      <p>Enlist below to receive your Citizen Identification Number, the Monthly Compliance Bulletin, and one (1) free emotion to be selected for you at random.</p>
+
+      <p>Refusal to enlist will not be punished, but will be noted. The Department keeps very good notes. The Department keeps notes on the notes.</p>
+    </div>
+
+    <div class="manifesto__sig">
+      <div class="manifesto__sig__line">
+        SIGNED <b>OFFICER PEMBERTON</b> &nbsp; · &nbsp; OFFICE OF VOLUNTARY OBEDIENCE
+      </div>
+      <div class="manifesto__scribble">~&nbsp;P&nbsp;~</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     ENLISTMENT FORM
+═══════════════════════════════════════════════════ -->
+<section class="enlist" id="enlist">
+  <div class="frame">
+    <div class="enlist__inner">
+      <div class="form-no">FORM 14-A · ENLISTMENT &amp; CITIZEN INTAKE</div>
+      <h2 class="enlist__title">Request Citizen<br>Identification.</h2>
+      <p class="enlist__lede">Provide a working email address. The Department will issue your number, your emotion, and your first Bulletin within seven (7) working notions.</p>
+
+      <form class="enlist-form" id="enlist-form" novalidate>
+        <div class="enlist-row">
+          <label for="email" class="honey">Email address</label>
+          <input id="email" name="email" type="email" placeholder="citizen@yourdomain.gov" required autocomplete="email" />
+          <button type="submit" id="submit-btn">SURRENDER</button>
+        </div>
+        <input type="text" name="loyalty_oath" class="honey" tabindex="-1" autocomplete="off" />
+        <p class="enlist__consent">By enlisting you consent to monthly correspondence. <a href="/withdraw.html">Withdrawal policy.</a></p>
+      </form>
+
+      <div class="enlist__success" id="success" role="status" aria-live="polite">
+        <div class="enlist__success__stamp">RECEIVED</div>
+        <div class="enlist__success__row">
+          <span class="k">Citizen ID</span>
+          <span class="v" id="cid">DOS-—————</span>
+        </div>
+        <div class="enlist__success__row">
+          <span class="k">Approved Emotion</span>
+          <span class="v" id="emotion">—</span>
+        </div>
+        <div class="enlist__success__row">
+          <span class="k">Status</span>
+          <span class="v">ENROLLED · MONTHLY COMPLIANCE BULLETIN</span>
+        </div>
+        <div class="enlist__success__row">
+          <span class="k">Next Transmission</span>
+          <span class="v" id="next-send">FIRST OF THE MONTH · 09:00 UTC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FREQUENTLY SUBMITTED QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="section__no">§ 04 / FSQ</div>
+  <div class="frame">
+    <div class="fsq__head">
+      <div>
+        <p class="label">Public Inquiries</p>
+        <h2 class="fsq__title">Frequently Submitted&nbsp;Questions.</h2>
+      </div>
+      <p class="label">Sec. 04 — Updated Quarterly</p>
+    </div>
+
+    <div class="fsq__grid">
+
+      <article class="fsq__item">
+        <span class="fsq__item__no">Q.01</span>
+        <h3 class="fsq__item__q">Is the Department real?</h3>
+        <p class="fsq__item__a">The Department is as real as it needs to be. Its existence is supported by a small but devoted civil service and the unwavering belief of the Bird.</p>
+      </article>
+
+      <article class="fsq__item">
+        <span class="fsq__item__no">Q.02</span>
+        <h3 class="fsq__item__q">What is the Monthly Compliance Bulletin?</h3>
+        <p class="fsq__item__a">A short transmission, issued on the first of every month, containing approved figures, one mandatory feeling, and a homework assignment of negligible difficulty.</p>
+      </article>
+
+      <article class="fsq__item">
+        <span class="fsq__item__no">Q.03</span>
+        <h3 class="fsq__item__q">Will my data be sold?</h3>
+        <p class="fsq__item__a">Your data will be filed. The Department prefers filing to selling. Filing is more dignified, and it does not require accountants.</p>
+      </article>
+
+      <article class="fsq__item">
+        <span class="fsq__item__no">Q.04</span>
+        <h3 class="fsq__item__q">May I choose my own emotion?</h3>
+        <p class="fsq__item__a">No. The Emotion Allocation Committee operates on a strictly random basis. Citizens who attempt to request an emotion will receive Mild Confusion as a corrective measure.</p>
+      </article>
+
+      <article class="fsq__item">
+        <span class="fsq__item__no">Q.05</span>
+        <h3 class="fsq__item__q">Who is the Bird?</h3>
+        <p class="fsq__item__a">Do not question the Bird. The Bird is watching. The Bird is proud. Further inquiries on this subject have been redirected to the Office of Public Calm.</p>
+      </article>
+
+      <article class="fsq__item">
+        <span class="fsq__item__no">Q.06</span>
+        <h3 class="fsq__item__q">May I withdraw my consent?</h3>
+        <p class="fsq__item__a">Yes. A single button at the foot of every transmission terminates your enrollment immediately. The Department will be disappointed but will, in time, recover.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     BULLETIN TEASER
+═══════════════════════════════════════════════════ -->
+<section class="bulletin">
+  <div class="frame">
+    <div class="bulletin__wrap">
+
+      <aside class="bulletin__envelope" aria-label="Sample bulletin">
+        <div class="bulletin__envelope__bar" aria-hidden="true"></div>
+        <p class="label">PREVIEW · FOR ENLISTED CITIZENS</p>
+        <h4>Bulletin No. 001</h4>
+        <p style="font-family:'Newsreader',serif; font-style:italic; color:var(--ink-soft); font-size:14px; margin-top:4px;">Supervised Joy is now in effect.</p>
+
+        <div class="bulletin__envelope__rows">
+          <div class="bulletin__envelope__row"><span class="k">Issued</span><span class="v">2026.06.01</span></div>
+          <div class="bulletin__envelope__row"><span class="k">Officer</span><span class="v">Pemberton</span></div>
+          <div class="bulletin__envelope__row"><span class="k">Compliance</span><span class="v">94.2%</span></div>
+          <div class="bulletin__envelope__row"><span class="k">Length</span><span class="v">418 words</span></div>
+        </div>
+      </aside>
+
+      <div>
+        <p class="label">Section 05 — Monthly Compliance Bulletin</p>
+        <h3>The Department<br>does not spam.<br>The Department <em>summons.</em></h3>
+        <p>Issued on the first of each month at 09:00, the Bulletin reports on developments in citizen surrender, the assignment of a single sanctioned feeling, and one (1) gentle homework task to be completed at the citizen's leisure or under duress.</p>
+
+        <ul class="bulletin__list">
+          <li><span><b>Compliance Figures.</b> Fabricated statistics, presented seriously, soothing in their precision.</span></li>
+          <li><span><b>Approved Emotion of the Month.</b> A single sanctioned feeling, with a paragraph on its correct usage.</span></li>
+          <li><span><b>Citizen Spotlight.</b> A model citizen is praised. The model citizen does not exist.</span></li>
+          <li><span><b>Recommended Surrender.</b> A small homework assignment for the citizen's spiritual maintenance.</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     PROCESS STRIP
+═══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="section__no">§ 06 / WORK IN PROGRESS</div>
+  <div class="frame">
+    <div class="strip__head">
+      <div>
+        <p class="label">Documentary Evidence</p>
+        <h2 class="strip__title">From the&nbsp;Drafting Room.</h2>
+      </div>
+      <p class="label">Hover to declassify</p>
+    </div>
+
+    <div class="strip__grid">
+
+      <figure class="strip__item">
+        <div class="strip__img strip__img--1"><div class="strip__img__inner"></div></div>
+        <figcaption class="strip__cap">
+          <span>Plate 01 — Mascot Studies</span>
+          <span class="strip__cap__redact">██████████</span>
+        </figcaption>
+      </figure>
+
+      <figure class="strip__item">
+        <div class="strip__img strip__img--2"><div class="strip__img__inner"></div></div>
+        <figcaption class="strip__cap">
+          <span>Plate 02 — Stamp Trials</span>
+          <span class="strip__cap__redact">███████</span>
+        </figcaption>
+      </figure>
+
+      <figure class="strip__item">
+        <div class="strip__img strip__img--3"><div class="strip__img__inner"></div></div>
+        <figcaption class="strip__cap">
+          <span>Plate 03 — Letterhead Tests</span>
+          <span class="strip__cap__redact">█████████████</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer class="foot">
+  <div class="frame">
+    <div class="foot__grid">
+
+      <div>
+        <div class="foot__brand">Dept. of Surrender</div>
+        <p class="foot__tag">An official non-agency of an unofficial non-government. <em>You are free.</em></p>
+      </div>
+
+      <div>
+        <h5>Offices</h5>
+        <ul>
+          <li><a href="/pending.html#offices">Civilian Processing</a></li>
+          <li><a href="/pending.html#offices">Voluntary Obedience</a></li>
+          <li><a href="/pending.html#offices">Public Calm</a></li>
+          <li><a href="/pending.html#offices">Emotion Allocation</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Records</h5>
+        <ul>
+          <li><a href="/requisition.html">The Commissary</a></li>
+          <li><a href="/bulletin.html">Bulletin Archive</a></li>
+          <li><a href="/privacy.html">Privacy Statement</a></li>
+          <li><a href="/withdraw.html">Withdrawal Policy</a></li>
+          <li><a href="/pending.html#existence">Notice of Existence</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Correspondence</h5>
+        <ul>
+          <li><a href="mailto:complaints@departmentofsurrender.com">File a Complaint</a></li>
+          <li><a href="mailto:postmaster@departmentofsurrender.com">Postmaster</a></li>
+          <li><a href="/pending.html#instagram">Instagram</a></li>
+          <li><a href="/pending.html#bird">The Bird</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="foot__bottom">
+      <span class="foot__copy">© 2026 · DEPARTMENT OF SURRENDER · ALL RIGHTS SURRENDERED</span>
+      <span class="foot__motto">This website is not a government website. It is something worse.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     CLASSIFICATION BAR
+═══════════════════════════════════════════════════ -->
+<div class="classified">
+  <span>CLASSIFIED — FOR ENLISTED CITIZENS ONLY</span>
+  <span class="classified__center">▲ DO NOT QUESTION THE BIRD ▲</span>
+  <span>PAGE 1 OF 1</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     STICKY MYSTERY-FILE PILL
+═══════════════════════════════════════════════════ -->
+<div class="pill" id="pill" role="region" aria-label="Mystery file">
+  <button class="pill__btn" id="pill-open" type="button">▲ Claim Mystery File</button>
+  <button class="pill__close" id="pill-close" type="button" aria-label="Dismiss">×</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     CLASSIFIED DOSSIER MODAL
+═══════════════════════════════════════════════════ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="dossier" role="document">
+    <div class="dossier__bar" aria-hidden="true"></div>
+    <button class="dossier__close" id="modal-close" type="button" aria-label="Close">×</button>
+
+    <div class="dossier__inner">
+      <div class="dossier__head">
+        <div class="dossier__no">FORM 22-Q · DOSSIER REQUEST · EYES ONLY</div>
+        <h3 id="modal-title" class="dossier__title">Open Your<br>Mystery File.</h3>
+      </div>
+
+      <p class="dossier__lede">Submit a working email and the Department will hand-deliver one (1) personalized intelligence packet, classified at the Mild Inconvenience level.</p>
+
+      <form class="dossier-form" id="dossier-form" novalidate>
+        <div class="enlist-row">
+          <input type="email" name="email" placeholder="citizen@yourdomain.gov" required autocomplete="email" aria-label="Email address" />
+          <button type="submit" id="dossier-submit">DECLASSIFY</button>
+        </div>
+        <input type="text" name="loyalty_oath" class="honey" tabindex="-1" autocomplete="off" />
+      </form>
+
+      <div class="dossier__readout" id="dossier-readout">
+        <div class="dossier__row"><span class="k">Citizen ID</span><span class="v" id="d-cid">—</span></div>
+        <div class="dossier__row"><span class="k">Profile</span><span class="v" id="d-prof">—</span></div>
+        <div class="dossier__row"><span class="k">Threat Level</span><span class="v" id="d-threat">—</span></div>
+        <div class="dossier__row"><span class="k">Mystery Emotion</span><span class="v" id="d-emo">—</span></div>
+        <div class="dossier__row"><span class="k">Last Seen</span><span class="v" id="d-loc">—</span></div>
+
+        <div class="dossier__intercept" id="d-intercept">—</div>
+
+        <div class="dossier__assignment">
+          <div class="dossier__assignment__lab">RECOMMENDED SURRENDER · NEXT 24 HOURS</div>
+          <div class="dossier__assignment__task" id="d-task">—</div>
+        </div>
+
+        <div class="dossier__stamp" id="d-stamp">DECLASSIFIED 2026.05.15</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPT
+═══════════════════════════════════════════════════ -->
+<script>
+(() => {
+  // ── rotating notification bar ───────────────────────
+  const alerts = [
+    "NATIONAL THREAT LEVEL: MILD INCONVENIENCE",
+    "ALL CITIZENS ARE REMINDED THAT EVERYTHING IS FINE",
+    "COMPLIANCE FIGURES UP 3.2% THIS QUARTER",
+    "THE FLAMINGO IS WATCHING. THE FLAMINGO IS PROUD.",
+    "TODAY'S RECOMMENDED EMOTION: GRATITUDE",
+    "DO NOT QUESTION THE BIRD",
+    "THE DEPARTMENT THANKS YOU FOR YOUR ATTENTION",
+    "ENLISTMENT IS VOLUNTARY · NON-ENLISTMENT WILL BE NOTED"
+  ];
+  const bar = document.getElementById("alert-bar");
+  const text = document.getElementById("alert-text");
+  let i = 0;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion) {
+    setInterval(() => {
+      bar.classList.add("is-fading");
+      setTimeout(() => {
+        i = (i + 1) % alerts.length;
+        text.textContent = alerts[i];
+        bar.classList.remove("is-fading");
+      }, 320);
+    }, 6000);
+  }
+
+  // ── randomized masthead ─────────────────────────────
+  const offices = [
+    "OFFICE OF INTAKE",
+    "OFFICE OF ENLISTMENT",
+    "OFFICE OF CIVILIAN PROCESSING",
+    "OFFICE OF VOLUNTARY OBEDIENCE",
+    "OFFICE OF PUBLIC CALM"
+  ];
+  document.getElementById("office-name").textContent =
+    offices[Math.floor(Math.random() * offices.length)];
+
+  const fileNo = String(Math.floor(1000 + Math.random() * 8999));
+  document.getElementById("file-no").textContent = fileNo + "-A";
+
+  const today = new Date();
+  const dateStr =
+    today.getFullYear() + "." +
+    String(today.getMonth() + 1).padStart(2, "0") + "." +
+    String(today.getDate()).padStart(2, "0");
+  document.getElementById("today").textContent = dateStr;
+
+  // ── randomized submit verb ──────────────────────────
+  const verbs = ["SURRENDER", "ENLIST", "COMPLY", "SUBMIT", "GIVE UP GRACEFULLY"];
+  document.getElementById("submit-btn").textContent =
+    verbs[Math.floor(Math.random() * verbs.length)];
+
+  // ── enlistment form ─────────────────────────────────
+  const form = document.getElementById("enlist-form");
+  const success = document.getElementById("success");
+  const cidEl = document.getElementById("cid");
+  const emoEl = document.getElementById("emotion");
+  const submitBtn = document.getElementById("submit-btn");
+
+  const emotions = [
+    "Supervised Joy", "Mild Gratitude", "Polite Resignation",
+    "Quiet Wonder", "Compliant Curiosity", "Authorized Hope",
+    "Restrained Delight", "Permitted Melancholy", "Gentle Awe",
+    "Routine Astonishment", "Uniform Amusement"
+  ];
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const newCID = () => {
+    let s = "DOS-";
+    for (let n = 0; n < 6; n++) s += alphabet[Math.floor(Math.random() * alphabet.length)];
+    return s;
+  };
+
+  const persistEmail = (email, source, citizen_id) => {
+    return fetch("/api/enlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, source, citizen_id })
+    }).then(r => r.ok ? r.json() : null).catch(() => null);
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const honey = form.querySelector('[name="loyalty_oath"]').value;
+    const email = form.querySelector('[name="email"]').value.trim();
+    if (honey || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "PROCESSING SURRENDER...";
+
+    const citizenId = newCID();
+    const localEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+
+    persistEmail(email, "main", citizenId); // fire and forget
+
+    setTimeout(() => {
+      form.style.display = "none";
+      success.classList.add("is-active");
+      cidEl.textContent = citizenId;
+      emoEl.textContent = localEmotion;
+    }, 700);
+  });
+
+  // ── sticky pill + classified dossier modal ──────────
+  const pill        = document.getElementById("pill");
+  const pillOpen    = document.getElementById("pill-open");
+  const pillClose   = document.getElementById("pill-close");
+  const modal       = document.getElementById("modal");
+  const modalClose  = document.getElementById("modal-close");
+  const dForm       = document.getElementById("dossier-form");
+  const dReadout    = document.getElementById("dossier-readout");
+  const dSubmit     = document.getElementById("dossier-submit");
+  const dStamp      = document.getElementById("d-stamp");
+
+  try {
+    if (localStorage.getItem("dos-pill-dismissed") === "1") pill.classList.add("is-hidden");
+  } catch (e) {}
+
+  const openModal = () => {
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    setTimeout(() => modal.querySelector("input[type=email]").focus(), 200);
+  };
+  const closeModal = () => {
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+  };
+
+  pillOpen.addEventListener("click", openModal);
+  pillClose.addEventListener("click", (e) => {
+    e.stopPropagation();
+    pill.classList.add("is-hidden");
+    try { localStorage.setItem("dos-pill-dismissed", "1"); } catch (err) {}
+  });
+  modalClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+
+  // dossier content pools
+  const profiles = [
+    "GENERALLY COMPLIANT · MILDLY DISTRACTED",
+    "OBSERVED PURCHASING UNNECESSARY ITEMS",
+    "MAINTAINS EYE CONTACT WITH THE SUN",
+    "REPORTED HUMMING IN A BANK",
+    "EXCESSIVE WONDERING · CATEGORY 3",
+    "EXHIBITS UNAPPROVED ENTHUSIASM",
+    "READS FOOTNOTES VOLUNTARILY"
+  ];
+  const threats = [
+    "MILD INCONVENIENCE",
+    "GRADUAL UNEASE",
+    "POLITE CONFUSION",
+    "MANAGEABLE DREAD",
+    "BUREAUCRATIC AMBIGUITY",
+    "NEGLIGIBLE",
+    "CHARMING"
+  ];
+  const myEmotions = [
+    "Approved Wistfulness",
+    "Supervised Joy",
+    "Quiet Smugness",
+    "Routine Astonishment",
+    "Conditional Hope",
+    "Uniform Amusement",
+    "Pre-Approved Longing",
+    "Civic Tenderness"
+  ];
+  const locations = [
+    "BETWEEN TWO BROWSER TABS",
+    "INSIDE A CAR ON A FRIDAY",
+    "STARING INTO A REFRIGERATOR",
+    "AISLE 7 · ITEM 4",
+    "THE SECOND BATHROOM",
+    "A WINDOW · UNSPECIFIED CITY",
+    "REDACTED · REDACTED · REDACTED"
+  ];
+  const intercepts = [
+    "“...and then I just stood there, holding the receipt.”",
+    "“I don't think the meeting needed to be a meeting.”",
+    "“why is everyone pretending to know what soft launch means.”",
+    "“The sky was, frankly, acceptable today.”",
+    "“Yes officer, I did look at the bird directly. I regret nothing.”",
+    "“the fridge is humming a different tune. should i be concerned.”"
+  ];
+  const tasks = [
+    "Sit in a chair for eleven (11) minutes without consulting any device.",
+    "Walk past one (1) mirror without checking your reflection.",
+    "Eat a meal you did not photograph.",
+    "Send a single message containing only the word “noted.”",
+    "Apologize to a houseplant. The Department will know if you don't.",
+    "Stand near a window for the duration of one (1) song. Do not narrate the view.",
+    "Open a notebook. Close the notebook. Resume your day."
+  ];
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+
+  dForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const honey = dForm.querySelector('[name="loyalty_oath"]').value;
+    const email = dForm.querySelector('[name="email"]').value.trim();
+    if (honey || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+    dSubmit.disabled = true;
+    dSubmit.textContent = "DECRYPTING...";
+
+    const citizenId = newCID();
+    persistEmail(email, "dossier", citizenId); // fire and forget
+
+    setTimeout(() => {
+      dForm.style.display = "none";
+      document.getElementById("d-cid").textContent = citizenId;
+      document.getElementById("d-prof").textContent = pick(profiles);
+      document.getElementById("d-threat").innerHTML = "<em>" + pick(threats) + "</em>";
+      document.getElementById("d-emo").textContent = pick(myEmotions);
+      document.getElementById("d-loc").textContent = pick(locations);
+      document.getElementById("d-intercept").textContent = pick(intercepts);
+      document.getElementById("d-task").textContent = pick(tasks);
+      dReadout.classList.add("is-active");
+      dStamp.classList.add("is-active");
+    }, 800);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Commissary — Department of Surrender</title>
+<meta name="description" content="Requisition official Department-issued goods. Payment processed by PayPal." />
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Special+Elite&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="subpage.css">
+<style>
+  /* ── commissary-specific ── */
+  .req-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 40px;
+    align-items: start;
+    margin-top: 8px;
+  }
+
+  .req-card {
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    padding: 22px;
+    box-shadow: 6px 6px 0 var(--paper-shade);
+  }
+
+  .req-plate {
+    aspect-ratio: 4 / 3;
+    border: 1px dashed var(--ink-faint);
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+
+  .req-plate__seal {
+    width: 132px; height: 132px;
+    border: 3px solid var(--stamp);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--stamp);
+    font-family: 'Special Elite', monospace;
+    line-height: 1.05;
+    transform: rotate(-6deg);
+    opacity: 0.9;
+  }
+  .req-plate__seal::before {
+    content: ""; position: absolute;
+    width: 116px; height: 116px;
+    border: 1px solid var(--stamp); border-radius: 50%;
+    transform: rotate(-6deg);
+  }
+  .req-plate__seal small { font-size: 9px; letter-spacing: 0.18em; }
+  .req-plate__seal b { font-size: 19px; letter-spacing: 0.04em; margin: 3px 0; }
+
+  .req-name {
+    font-family: 'Special Elite', monospace;
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .req-sku {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--ink-faint); text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .req-desc {
+    font-family: 'Newsreader', serif;
+    font-size: 16px; line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .req-spec {
+    list-style: none; margin: 18px 0 0; padding: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .req-spec li {
+    display: grid; grid-template-columns: 130px 1fr; gap: 10px;
+    padding: 8px 0; border-bottom: 1px dotted var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .req-spec .k { color: var(--ink-faint); }
+  .req-spec .v { color: var(--ink); }
+
+  /* ── checkout column ── */
+  .req-buy { position: sticky; top: 20px; }
+
+  .req-buy__bar {
+    height: 26px;
+    background: repeating-linear-gradient(45deg, var(--ink) 0 8px, var(--paper) 8px 16px);
+    border-bottom: 1px solid var(--ink);
+    margin: -22px -22px 18px;
+  }
+
+  .req-price {
+    font-family: 'Special Elite', monospace;
+    font-size: 40px; color: var(--ink);
+    line-height: 1; margin-bottom: 2px;
+  }
+  .req-price__cur { font-size: 14px; color: var(--ink-faint); letter-spacing: 0.1em; }
+
+  .req-qty {
+    display: flex; align-items: center; gap: 0;
+    border: 1px solid var(--ink); width: fit-content;
+    margin: 18px 0 6px; background: var(--paper);
+  }
+  .req-qty button {
+    width: 38px; height: 38px; border: 0; cursor: pointer;
+    background: var(--ink); color: var(--paper);
+    font-family: 'JetBrains Mono', monospace; font-size: 16px;
+  }
+  .req-qty button:hover { background: var(--stamp); }
+  .req-qty input {
+    width: 54px; height: 38px; text-align: center; border: 0;
+    border-left: 1px solid var(--ink); border-right: 1px solid var(--ink);
+    background: transparent; font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; color: var(--ink); -moz-appearance: textfield;
+  }
+  .req-qty input::-webkit-outer-spin-button,
+  .req-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  .req-total {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 14px 0 18px;
+    border-top: 1px solid var(--rule); padding-top: 14px;
+    display: flex; justify-content: space-between;
+  }
+  .req-total b { color: var(--ink); font-weight: 500; }
+
+  #paypal-buttons { min-height: 50px; }
+
+  .req-note {
+    font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+    letter-spacing: 0.1em; color: var(--ink-faint);
+    text-transform: uppercase; margin-top: 14px; text-align: center;
+    line-height: 1.5;
+  }
+
+  .req-msg {
+    font-family: 'Newsreader', serif; font-style: italic;
+    font-size: 15px; color: var(--ink-soft);
+    border: 1px solid var(--rule); background: var(--paper-deep);
+    padding: 16px; line-height: 1.5;
+  }
+  .req-msg b { font-style: normal; font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--stamp); display: block; margin-bottom: 6px; }
+
+  /* ── receipt (success) ── */
+  .receipt { display: none; }
+  .receipt.is-active { display: block; animation: rin 360ms ease both; }
+  @keyframes rin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .receipt__stamp {
+    border: 2px solid var(--stamp); color: var(--stamp);
+    display: inline-block; padding: 6px 14px; transform: rotate(-4deg);
+    font-family: 'Special Elite', monospace; font-size: 15px;
+    letter-spacing: 0.14em; margin-bottom: 18px;
+  }
+  .receipt__row {
+    display: grid; grid-template-columns: 140px 1fr; gap: 12px;
+    padding: 8px 0; border-bottom: 1px dashed var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  }
+  .receipt__row .k { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.16em; }
+  .receipt__row .v { color: var(--ink); }
+
+  @media (max-width: 760px) {
+    .req-grid { grid-template-columns: 1fr; }
+    .req-buy { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<div class="alert-bar">
+  <span class="chev">▲</span>
+  <span>SECTION 30 · OFFICE OF REQUISITION &amp; ACQUISITION</span>
+  <span class="chev">▲</span>
+</div>
+
+<header class="masthead">
+  <a href="/">DEPARTMENT OF SURRENDER</a>
+  <div class="masthead__office">THE COMMISSARY</div>
+  <div class="masthead__file">FILE NO. <b>0030-C</b> · <b>2026.06.28</b></div>
+</header>
+
+<main>
+  <div class="frame">
+
+    <div class="doc-head">
+      <p class="label">Form 30-C · Requisition of Department Goods</p>
+      <h1>The<br>Commissary.</h1>
+      <p class="lede">The Department permits the orderly acquisition of one (1) sanctioned good. Payment is processed by PayPal. No citizen is obligated to purchase, but non-purchase will, as ever, be noted.</p>
+      <div class="meta">
+        <span><b>QUARTERMASTER</b> HOLT</span>
+        <span><b>PAYMENT</b> PAYPAL</span>
+        <span id="env-badge"><b>MODE</b> —</span>
+      </div>
+      <div class="stamp">IN STOCK</div>
+    </div>
+
+    <div class="req-grid">
+
+      <!-- product -->
+      <div class="req-card">
+        <div class="req-plate" aria-hidden="true">
+          <div class="req-plate__seal">
+            <small>DEPT · OF</small>
+            <b>SURRENDER</b>
+            <small>UNDER SEAL</small>
+          </div>
+        </div>
+        <h2 class="req-name" id="p-name">—</h2>
+        <p class="req-sku" id="p-sku">—</p>
+        <p class="req-desc" id="p-desc">Loading from the Department's catalogue…</p>
+
+        <ul class="req-spec">
+          <li><span class="k">Format</span><span class="v">Digital · issued by email</span></li>
+          <li><span class="k">Numbering</span><span class="v">Hand-assigned, non-sequential</span></li>
+          <li><span class="k">Delivery</span><span class="v">Within 7 working notions</span></li>
+          <li><span class="k">Refunds</span><span class="v">By petition to the Postmaster</span></li>
+        </ul>
+      </div>
+
+      <!-- checkout -->
+      <aside class="req-card req-buy" aria-label="Checkout">
+        <div class="req-buy__bar"></div>
+
+        <div id="checkout">
+          <div class="req-price"><span id="p-price">—</span> <span class="req-price__cur" id="p-cur"></span></div>
+          <p class="label">Per certificate</p>
+
+          <div class="req-qty">
+            <button type="button" id="qty-minus" aria-label="Decrease quantity">−</button>
+            <input type="number" id="qty" value="1" min="1" max="10" inputmode="numeric" aria-label="Quantity" />
+            <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+
+          <div class="req-total">
+            <span>Total due</span>
+            <b id="total">—</b>
+          </div>
+
+          <div id="paypal-buttons"></div>
+          <div id="buy-message"></div>
+
+          <p class="req-note">
+            Secured by PayPal · No card details touch the Department.<br>
+            You may pay by PayPal balance or any major card.
+          </p>
+        </div>
+
+        <!-- success -->
+        <div class="receipt" id="receipt">
+          <div class="receipt__stamp">RECEIVED</div>
+          <div class="receipt__row"><span class="k">Status</span><span class="v" id="r-status">—</span></div>
+          <div class="receipt__row"><span class="k">Order No.</span><span class="v" id="r-order">—</span></div>
+          <div class="receipt__row"><span class="k">Amount</span><span class="v" id="r-amount">—</span></div>
+          <div class="receipt__row"><span class="k">Citizen</span><span class="v" id="r-payer">—</span></div>
+          <p class="req-note" style="margin-top:18px;">
+            Your certificate will be issued to your PayPal email within seven (7) working notions.
+            The Department thanks you for your compliance.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+
+    <a href="/" class="back">← Return to Processing</a>
+
+  </div>
+</main>
+
+<div class="classified">
+  <span>CLASSIFIED — FOR ENLISTED CITIZENS ONLY</span>
+  <span class="center">▲ ALL SALES ARE FINAL. SO IS EVERYTHING. ▲</span>
+  <span>PAGE 1 OF 1</span>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const state = { price: 0, currency: 'USD', max: 10 };
+
+  const fmt = (n) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: state.currency }).format(n);
+
+  const getQty = () => {
+    let q = parseInt($('qty').value, 10);
+    if (!Number.isFinite(q) || q < 1) q = 1;
+    if (q > state.max) q = state.max;
+    return q;
+  };
+
+  const syncTotal = () => {
+    $('qty').value = getQty();
+    $('total').textContent = fmt(state.price * getQty());
+  };
+
+  const message = (label, html) => {
+    $('buy-message').innerHTML = '<div class="req-msg"><b>' + label + '</b>' + html + '</div>';
+  };
+
+  // ── quantity controls ──
+  $('qty-minus').addEventListener('click', () => { $('qty').value = getQty() - 1; syncTotal(); });
+  $('qty-plus').addEventListener('click',  () => { $('qty').value = getQty() + 1; syncTotal(); });
+  $('qty').addEventListener('input', syncTotal);
+
+  // ── boot ──
+  async function init() {
+    let cfg;
+    try {
+      const r = await fetch('/api/paypal/client-config');
+      cfg = await r.json();
+    } catch (e) {
+      message('Notice', 'The Commissary is temporarily unstaffed. Please return shortly.');
+      return;
+    }
+
+    // fill product display
+    state.price = Number(cfg.product.price) || 0;
+    state.currency = cfg.currency || 'USD';
+    state.max = cfg.product.maxQuantity || 10;
+    $('p-name').textContent = cfg.product.name;
+    $('p-sku').textContent = 'SKU · ' + cfg.product.sku;
+    $('p-desc').textContent = cfg.product.description;
+    $('p-price').textContent = fmt(state.price);
+    $('p-cur').textContent = state.currency;
+    $('qty').max = state.max;
+    $('env-badge').innerHTML = '<b>MODE</b> ' + String(cfg.env || '—').toUpperCase();
+    syncTotal();
+
+    if (!cfg.clientId) {
+      message('Awaiting Authorization',
+        'PayPal is not yet configured for this office. The administrator must set the ' +
+        'PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET and PAYPAL_ENV environment variables.');
+      return;
+    }
+
+    // load the PayPal SDK with the public client id
+    const s = document.createElement('script');
+    s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(cfg.clientId) +
+            '&currency=' + encodeURIComponent(state.currency) + '&intent=capture';
+    s.onload = renderButtons;
+    s.onerror = () => message('Notice', 'Unable to reach PayPal. Please check your connection and reload.');
+    document.head.appendChild(s);
+  }
+
+  function renderButtons() {
+    if (!window.paypal) return;
+    window.paypal.Buttons({
+      style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal', height: 44 },
+
+      createOrder: () =>
+        fetch('/api/paypal/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ quantity: getQty() })
+        })
+        .then((r) => r.json())
+        .then((d) => { if (!d.id) throw new Error('no order id'); return d.id; }),
+
+      onApprove: (data) =>
+        fetch('/api/paypal/capture-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderID: data.orderID })
+        })
+        .then((r) => r.json())
+        .then(showReceipt)
+        .catch(() => message('Notice', 'Payment was approved but confirmation was interrupted. Contact the Postmaster.')),
+
+      onCancel: () =>
+        message('Withdrawn', 'The requisition was cancelled. The Department holds no grudge. The Department holds notes.'),
+
+      onError: () =>
+        message('Notice', 'The transaction was interrupted by the Bird. Please try again.')
+    }).render('#paypal-buttons');
+  }
+
+  function showReceipt(res) {
+    if (!res || res.status !== 'COMPLETED') {
+      message('Notice', 'The payment did not complete. No charge was made.');
+      return;
+    }
+    $('r-status').textContent = res.status;
+    $('r-order').textContent = res.order_id || '—';
+    $('r-amount').textContent = res.amount ? (res.amount.value + ' ' + res.amount.currency_code) : '—';
+    $('r-payer').textContent = res.payer_name || res.payer_email || 'Citizen (anonymous)';
+    $('checkout').style.display = 'none';
+    $('receipt').classList.add('is-active');
+  }
+
+  init();
+})();
+</script>
+
+</body>
+</html>
