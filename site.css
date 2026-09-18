@@ -19,3 +19,10 @@
 
 /* The Orion Protocol book artwork */
 .doctrine-intro{position:static}.book-art{max-width:28rem;margin:2rem 0 0;border:1px solid var(--line);background:#1c1916}.book-art a{display:block}.book-art img{display:block;width:100%;height:auto}.book-art figcaption{padding:.85rem 1rem;font-size:.8125rem;color:var(--muted)}
+
+/* Free sample / primary reader invitation */
+.read-cta{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:44px;padding:.65rem .9rem;background:var(--accent);border:1px solid var(--accent);color:var(--bg);text-decoration:none;font-weight:700;line-height:1.4}
+.read-cta:hover{background:var(--ink);border-color:var(--ink)}
+.sample-button{min-width:15.5rem}.sample-note{margin:.75rem 0 0;font-size:.75rem;color:var(--accent);letter-spacing:.025em}.sample-note+.hero-note{margin-top:.75rem}
+.signal-strip+.reading-room{border-top:0}.reading-room+.recovery{border-top:1px solid var(--line)}
+@media(max-width:700px){.top nav .buy{display:none}.top nav{gap:0}.read-cta{font-size:.75rem;padding:.55rem .65rem;gap:.4rem}.sample-button{min-width:0}.sample-note{line-height:1.65}.top .brand{font-size:.6875rem;gap:.55rem}}
