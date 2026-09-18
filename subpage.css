@@ -4,16 +4,16 @@
 ───────────────────────────────────────────────────── */
 
 :root {
-  --paper:       #efe7d6;
-  --paper-deep:  #e6dcc4;
-  --paper-shade: #d8ccae;
-  --ink:         #1a1612;
-  --ink-soft:    #4a3f33;
-  --ink-faint:   #8a7d68;
-  --rule:        #c8b88c;
-  --stamp:       #b21f2c;
-  --stamp-deep:  #8c1620;
-  --black-bar:   #0a0907;
+  --paper:       #0b120f;
+  --paper-deep:  #142019;
+  --paper-shade: #1c2b20;
+  --ink:         #e5e6d7;
+  --ink-soft:    #a4b7a3;
+  --ink-faint:   #859981;
+  --rule:        #364638;
+  --stamp:       #e4b660;
+  --stamp-deep:  #bd9750;
+  --black-bar:   #080f0b;
   --redaction:   #161311;
 }
 
@@ -23,7 +23,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 17px;
   line-height: 1.6;
   font-weight: 400;
@@ -58,7 +58,7 @@ body::after {
 }
 
 .label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -77,7 +77,7 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -100,7 +100,7 @@ body::after {
 }
 
 .masthead a {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
   letter-spacing: 0.04em;
   color: var(--ink);
@@ -108,7 +108,7 @@ body::after {
 }
 
 .masthead__office {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -117,7 +117,7 @@ body::after {
 }
 
 .masthead__file {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -145,7 +145,7 @@ main { flex: 1; padding: 64px 0 80px; }
 .doc-head .label { margin-bottom: 12px; }
 
 .doc-head h1 {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: clamp(40px, 5vw, 56px);
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -154,7 +154,7 @@ main { flex: 1; padding: 64px 0 80px; }
 }
 
 .doc-head .lede {
-  font-family: 'Newsreader', serif;
+  font-family: 'Courier New', Courier, monospace;
   font-style: italic;
   font-size: 18px;
   color: var(--ink-soft);
@@ -166,7 +166,7 @@ main { flex: 1; padding: 64px 0 80px; }
   margin-top: 24px;
   display: flex;
   gap: 22px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -183,7 +183,7 @@ main { flex: 1; padding: 64px 0 80px; }
   border: 2px solid var(--stamp);
   color: var(--stamp);
   padding: 6px 12px;
-  font-family: 'Special Elite', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 13px;
   letter-spacing: 0.14em;
   transform: rotate(-6deg);
@@ -195,7 +195,7 @@ main { flex: 1; padding: 64px 0 80px; }
 .prose { max-width: 700px; }
 
 .prose h2 {
-  font-family: 'Special Elite', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 24px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -207,7 +207,7 @@ main { flex: 1; padding: 64px 0 80px; }
 .prose h2:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
 
 .prose h3 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -246,7 +246,7 @@ main { flex: 1; padding: 64px 0 80px; }
 .prose code {
   background: var(--paper-deep);
   padding: 1px 6px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 0.88em;
   border: 1px solid var(--rule);
 }
@@ -261,7 +261,7 @@ main { flex: 1; padding: 64px 0 80px; }
   padding: 12px 18px;
   border: 1px solid var(--ink);
   background: var(--paper);
-  font-family: 'Special Elite', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 13px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -285,7 +285,7 @@ main { flex: 1; padding: 64px 0 80px; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -305,3 +305,23 @@ main { flex: 1; padding: 64px 0 80px; }
   .doc-head .stamp { position: static; display: inline-block; margin-top: 12px; }
   .classified { flex-direction: column; gap: 6px; padding: 12px 22px; text-align: center; }
 }
+
+/* ORION ARCHIVE / 1986 visual system */
+:root{color-scheme:dark}
+.alert-bar,.classified{color:#a4b7a3;min-height:2rem;height:auto;padding-block:.5rem}
+.alert-bar{padding-inline:1rem;text-align:center;letter-spacing:.06em}
+.masthead{border-bottom-color:#364638;background:#111c16}
+.masthead a,.back{color:#b2ef86}
+.masthead a{font-weight:700}
+.doc-head h1{font-family:Impact,'Arial Narrow','Arial Black',sans-serif;font-weight:900;letter-spacing:.01em;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1}
+.doc-head{border-bottom-color:#364638}
+.doc-head .stamp{position:static;display:inline-block;margin-top:1rem}
+.label,.masthead__office,.masthead__file,.doc-head .meta,.classified{font-size:.75rem;letter-spacing:.08em}
+.prose h2{color:#b2ef86;font-weight:700;font-size:1.4rem}
+.prose h3{font-size:.875rem}
+.prose p{color:#c4cfc0}
+.back{font-size:.875rem;border-color:#526449;box-shadow:3px 3px 0 #253921}
+.back:hover{box-shadow:4px 4px 0 #526449}
+:focus-visible{outline:2px solid #e4b660;outline-offset:5px}
+@media(max-width:640px){.doc-head h1{font-size:2.5rem}.alert-bar{font-size:.6875rem}.masthead a{font-size:.875rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.back{transition:none}}
