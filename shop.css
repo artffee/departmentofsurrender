@@ -3,3 +3,7 @@
 
 .visual .flamingo-art{height:28rem;object-fit:contain;background:#000}
 @media(max-width:760px){.visual .flamingo-art{height:auto;aspect-ratio:1}}
+
+/* Original book artwork */
+.visual{margin:0}.book-caption{padding:.9rem 1rem;font-size:.8125rem;color:var(--muted);background:#111c16;border-top:1px solid var(--rule)}
+@media(max-width:760px){.info{grid-row:auto}.visual{margin-inline:auto}}
