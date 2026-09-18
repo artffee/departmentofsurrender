@@ -20,7 +20,7 @@ const BASE = ENV === 'live'
 const PRODUCT = {
   sku:         'ORION-PROTOCOL-001',
   name:        'The Orion Protocol — Digital Edition',
-  description: 'The Orion Protocol by Orion Saint. Digital edition.',
+  description: 'The Orion Protocol by Orion Saint. A philosophical satire in eight parts. Digital edition.',
   price:       '14.00',                              // string, 2 decimals
   currency:    process.env.PAYPAL_CURRENCY || 'USD', // e.g. USD, EUR, GBP
   maxQuantity: 10
