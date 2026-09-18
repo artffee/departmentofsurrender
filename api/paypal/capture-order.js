@@ -1,58 +1,48 @@
-/* POST /api/paypal/capture-order
-   Body: { orderID: string }
-   Captures (charges) an approved order and returns a summary.
-   This is where you would FULFIL the purchase — e.g. email the
-   certificate, write a record to a database, etc. (see the TODO). */
-
-const { BASE, getAccessToken } = require('./_paypal');
-
+/* Confirm the server-priced book order, then capture it idempotently.
+   Never release the delivery URL for pending, mismatched, or failed payments. */
+const { BASE, PRODUCT, getAccessToken, getDownloadUrl } = require('./_paypal');
+function matchesProduct(order) {
+  const units = order.purchase_units;
+  if (!Array.isArray(units) || units.length !== 1) return false;
+  const unit = units[0];
+  const item = unit.items?.[0];
+  const qty = Number(item?.quantity);
+  return unit.reference_id === PRODUCT.sku && unit.items?.length === 1 && item.sku === PRODUCT.sku &&
+    Number.isInteger(qty) && qty >= 1 && qty <= PRODUCT.maxQuantity &&
+    item.unit_amount?.currency_code === PRODUCT.currency && Number(item.unit_amount.value) === Number(PRODUCT.price) &&
+    unit.amount?.currency_code === PRODUCT.currency && Number(unit.amount.value) === Number(PRODUCT.price) * qty;
+}
 module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'method_not_allowed' });
-    return;
-  }
-
+  res.setHeader('Cache-Control', 'no-store');
+  if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'method_not_allowed' }); }
+  const orderID = req.body?.orderID;
+  if (typeof orderID !== 'string' || !/^[A-Z0-9]{10,32}$/.test(orderID)) return res.status(400).json({ error: 'invalid_orderID' });
   try {
-    const orderID = req.body && req.body.orderID;
-    if (!orderID) {
-      res.status(400).json({ error: 'missing_orderID' });
-      return;
-    }
-
     const token = await getAccessToken();
-    const r = await fetch(`${BASE}/v2/checkout/orders/${orderID}/capture`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
-    });
-    const data = await r.json();
-
-    if (!r.ok) {
-      res.status(r.status).json({ error: 'capture_failed', detail: data });
-      return;
+    const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
+    const url = `${BASE}/v2/checkout/orders/${orderID}`;
+    const existing = await fetch(url, { headers, signal: AbortSignal.timeout(15000) });
+    if (!existing.ok) return res.status(502).json({ error: 'order_lookup_failed' });
+    let data = await existing.json();
+    if (!matchesProduct(data)) return res.status(409).json({ error: 'order_mismatch' });
+    // A status check after a lost response must never capture a second time.
+    if (data.status !== 'COMPLETED') {
+      const captured = await fetch(`${url}/capture`, {
+        method: 'POST', headers: { ...headers, Prefer: 'return=representation', 'PayPal-Request-Id': `capture-${orderID}` },
+        signal: AbortSignal.timeout(15000)
+      });
+      const result = await captured.json();
+      if (!captured.ok) return res.status(502).json({ error: 'capture_failed', issue: result.details?.[0]?.issue });
+      data = result;
     }
-
-    const capture = data &&
-      data.purchase_units && data.purchase_units[0] &&
-      data.purchase_units[0].payments &&
-      data.purchase_units[0].payments.captures &&
-      data.purchase_units[0].payments.captures[0];
-
-    // ── TODO: fulfilment ──────────────────────────────────
-    // Payment is confirmed only when data.status === 'COMPLETED'.
-    // Do delivery here (send the certificate email, log the sale,
-    // mark the citizen as a paying patron, etc).
-    // ──────────────────────────────────────────────────────
-
+    const unit = data.purchase_units?.[0];
+    const capture = unit?.payments?.captures?.[0];
+    const complete = data.status === 'COMPLETED' && capture?.status === 'COMPLETED';
+    const paidForBook = unit?.reference_id === PRODUCT.sku && capture?.amount?.currency_code === PRODUCT.currency && Number(capture?.amount?.value) >= Number(PRODUCT.price);
     res.status(200).json({
-      status:     data.status,                 // 'COMPLETED' on success
-      order_id:   data.id,
-      capture_id: capture && capture.id,
-      amount:     capture && capture.amount,
-      payer_name: data.payer && data.payer.name &&
-                  `${data.payer.name.given_name || ''} ${data.payer.name.surname || ''}`.trim(),
-      payer_email: data.payer && data.payer.email_address
+      status: data.status, capture_status: capture?.status, order_id: data.id,
+      capture_id: capture?.id, amount: capture?.amount,
+      ...(complete && paidForBook && getDownloadUrl() ? { downloadUrl: getDownloadUrl() } : {})
     });
-  } catch (e) {
-    res.status(500).json({ error: 'server_error', message: e.message });
-  }
+  } catch { res.status(500).json({ error: 'server_error' }); }
 };

@@ -18,9 +18,9 @@ const BASE = ENV === 'live'
    what the buyer is charged. Edit freely.
 ──────────────────────────────────────────────────────── */
 const PRODUCT = {
-  sku:         'DOS-CERT-001',
-  name:        'Official Certificate of Surrender',
-  description: 'One (1) hand-numbered digital Certificate of Surrender, issued under seal by the Department.',
+  sku:         'ORION-PROTOCOL-001',
+  name:        'The Orion Protocol — Digital Edition',
+  description: 'The Orion Protocol by Orion Saint. Digital edition.',
   price:       '14.00',                              // string, 2 decimals
   currency:    process.env.PAYPAL_CURRENCY || 'USD', // e.g. USD, EUR, GBP
   maxQuantity: 10
@@ -40,7 +40,8 @@ async function getAccessToken() {
       Authorization: `Basic ${auth}`,
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: 'grant_type=client_credentials'
+    body: 'grant_type=client_credentials',
+    signal: AbortSignal.timeout(15000)
   });
   if (!res.ok) {
     const detail = await res.text();
@@ -50,4 +51,14 @@ async function getAccessToken() {
   return data.access_token;
 }
 
-module.exports = { ENV, BASE, PRODUCT, getAccessToken };
+// Keep the delivery URL server-side until a matching payment is completed.
+function getDownloadUrl() {
+  try {
+    const url = new URL(process.env.ORION_DOWNLOAD_URL || '');
+    return url.protocol === 'https:' && !url.username && !url.password ? url.href : '';
+  } catch { return ''; }
+}
+function checkoutReady() {
+  return Boolean(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_CLIENT_SECRET && getDownloadUrl());
+}
+module.exports = { ENV, BASE, PRODUCT, getAccessToken, getDownloadUrl, checkoutReady };

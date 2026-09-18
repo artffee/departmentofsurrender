@@ -4,13 +4,16 @@
    server-side PRODUCT price, never from the browser, so the
    total cannot be tampered with from the client. */
 
-const { BASE, PRODUCT, getAccessToken } = require('./_paypal');
+const { BASE, PRODUCT, getAccessToken, checkoutReady } = require('./_paypal');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'method_not_allowed' });
     return;
   }
+
+  res.setHeader('Cache-Control', 'no-store');
+  if (!checkoutReady()) return res.status(503).json({ error: 'checkout_unavailable' });
 
   try {
     // Quantity is the only thing we trust from the client — and we clamp it.
@@ -53,16 +56,17 @@ module.exports = async (req, res) => {
     const r = await fetch(`${BASE}/v2/checkout/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify(order)
+      body: JSON.stringify(order),
+      signal: AbortSignal.timeout(15000)
     });
     const data = await r.json();
 
     if (!r.ok) {
-      res.status(r.status).json({ error: 'create_failed', detail: data });
+      res.status(r.status).json({ error: 'create_failed' });
       return;
     }
     res.status(200).json({ id: data.id });
   } catch (e) {
-    res.status(500).json({ error: 'server_error', message: e.message });
+    res.status(500).json({ error: 'server_error' });
   }
 };

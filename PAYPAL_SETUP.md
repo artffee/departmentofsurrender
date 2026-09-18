@@ -1,76 +1,42 @@
-# Adding PayPal payments — setup & testing
+# The Orion Protocol checkout
 
-This adds a **"Commissary"** shop page (`/requisition.html`) that sells one
-digital product through PayPal. The price is enforced **server-side** in
-Vercel serverless functions, so it can't be tampered with from the browser,
-and your PayPal **secret never reaches the visitor**.
+The digital edition costs $14 USD. The product and amount are enforced by
+`api/paypal/_paypal.js`; the browser only submits a quantity.
 
-## What was added
+## Configure in Vercel
 
-```
-requisition.html              ← the shop page (PayPal Smart Buttons)
-api/paypal/_paypal.js         ← product catalogue + price + PayPal auth helper
-api/paypal/client-config.js   ← serves the PUBLIC client id + product info
-api/paypal/create-order.js    ← creates the order (authoritative price)
-api/paypal/capture-order.js   ← captures payment after approval
-.env.example                  ← environment-variable template
-```
+Set these variables on the existing Department of Surrender project, then redeploy:
 
-## How the money flows
+| Variable | Value |
+| --- | --- |
+| `PAYPAL_ENV` | `sandbox` for testing; `live` after the sandbox flow is verified |
+| `PAYPAL_CLIENT_ID` | The matching PayPal application client ID |
+| `PAYPAL_CLIENT_SECRET` | The matching application secret; server-side only |
+| `PAYPAL_CURRENCY` | `USD` (default; homepage advertises USD) |
+| `ORION_DOWNLOAD_URL` | A working HTTPS link to the digital book |
 
-1. The page asks `/api/paypal/client-config` for your **public** Client ID and loads PayPal's SDK.
-2. Buyer clicks the PayPal button → page calls `/api/paypal/create-order`. The server computes the total from `_paypal.js` (never trusts the browser) and asks PayPal to create the order.
-3. Buyer approves in the PayPal popup → page calls `/api/paypal/capture-order`, which charges the card and returns a receipt.
+Checkout stays unavailable until both credentials and a valid HTTPS delivery
+URL exist. Never put credentials or the paid PDF in this public repository.
+The delivery URL is returned only for a matching, completed book payment.
+This is a download-link delivery flow, not an email service or a per-buyer
+expiring-link system. Choose a stable delivery link that buyers can access.
 
-## One-time setup
+## Verify before taking payments
 
-### 1. Get PayPal credentials
-1. Sign in / create a **PayPal Business account** at <https://www.paypal.com>.
-2. Go to the **Developer Dashboard**: <https://developer.paypal.com/dashboard/applications/sandbox>.
-3. **Apps & Credentials → Create App.** You get a **Client ID** and **Secret**.
-   - The page near the top toggles **Sandbox** (test) vs **Live** (real money) — each has its own Client ID/Secret.
+Use PayPal sandbox credentials and a sandbox buyer. Confirm the product says
+The Orion Protocol, quantity and total match, cancellation returns to checkout,
+and a completed payment displays the server-confirmed amount and working book
+link. Pending payments must not show a download. Network retries check the
+same order and use an idempotent capture request. Then switch the environment
+and credentials to live and redeploy.
 
-### 2. Add environment variables in Vercel
-Project → **Settings → Environment Variables**, add:
+No actual payment was made during the code repair. Account setup and an
+end-to-end sandbox purchase still require the merchant's PayPal credentials.
 
-| Name | Value (sandbox example) |
-|---|---|
-| `PAYPAL_ENV` | `sandbox` |
-| `PAYPAL_CLIENT_ID` | *(sandbox client id)* |
-| `PAYPAL_CLIENT_SECRET` | *(sandbox secret)* |
-| `PAYPAL_CURRENCY` | `USD` *(optional)* |
+## Local regression checks
 
-Redeploy after saving so the functions pick them up.
+Run `node --test tests/checkout.test.js`. These use mocked PayPal responses and
+never contact PayPal or charge money.
 
-### 3. Set your product
-Open `api/paypal/_paypal.js` and edit the `PRODUCT` block — `name`, `price`,
-`description`, `currency`. The `price` there is the real, authoritative price.
-
-## Testing in sandbox (no real money)
-
-1. Make sure `PAYPAL_ENV=sandbox` with **sandbox** credentials.
-2. Get a free test buyer account: Developer Dashboard → **Testing Tools → Sandbox Accounts** (PayPal auto-creates a "personal" buyer with an email + password). You can also copy a test card from **Testing Tools → Credit Card Generator**.
-3. Open `/requisition.html`, click the PayPal button, log in with the **sandbox buyer**, and approve.
-4. You should see the "RECEIVED" receipt, and the payment appears in the sandbox buyer/seller accounts.
-
-> **Run it locally with functions:** `npm i -g vercel` then `vercel dev` in this
-> folder (put your sandbox vars in a local `.env`). Opening the `.html` files
-> directly with file:// will show the page but the `/api/...` calls won't run —
-> you need `vercel dev` (or a deploy) for the serverless functions.
-
-## Going live
-
-1. Switch the Vercel env vars to your **Live** Client ID/Secret and set `PAYPAL_ENV=live`.
-2. Redeploy. Do one small real purchase to confirm.
-
-## Fulfilment (delivering what they bought)
-
-`api/paypal/capture-order.js` has a `// TODO: fulfilment` block that runs once
-payment is `COMPLETED`. That's where you'd email the certificate, log the sale,
-etc. Right now it just returns a receipt to the page.
-
-## Notes
-- The serverless functions use Node's built-in `fetch` (Node 18+). Vercel's
-  default runtime already meets this — no `npm install` needed.
-- The Client ID is **public** by design (it's in the page). Only the **Secret**
-  is sensitive, and it stays in the serverless functions.
+Official integration reference:
+https://developer.paypal.com/docs/checkout/standard/integrate/
