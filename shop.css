@@ -7,3 +7,5 @@
 /* Original book artwork */
 .visual{margin:0}.book-caption{padding:.9rem 1rem;font-size:.8125rem;color:var(--muted);background:#1c1916;border-top:1px solid var(--rule)}
 @media(max-width:760px){.info{grid-row:auto}.visual{margin-inline:auto}}
+
+.follow-story{max-width:60rem;margin:3rem auto;padding:1.5rem;border-top:1px solid #493e33;color:#b8ada0;font:14px/1.7 "Courier New",monospace}.follow-story a{display:inline-block;padding:.5rem 0;color:#d6b375}.follow-story span{font-size:12px}

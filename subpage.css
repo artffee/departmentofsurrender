@@ -325,3 +325,5 @@ main { flex: 1; padding: 64px 0 80px; }
 :focus-visible{outline:2px solid #c99562;outline-offset:5px}
 @media(max-width:640px){.doc-head h1{font-size:2.5rem}.alert-bar{font-size:.6875rem}.masthead a{font-size:.875rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.back{transition:none}}
+
+.follow-story{max-width:60rem;margin:3rem auto;padding:1.5rem;border-top:1px solid #493e33;color:#b8ada0;font:14px/1.7 "Courier New",monospace}.follow-story a{display:inline-block;padding:.5rem 0;color:#d6b375}.follow-story span{font-size:12px}
