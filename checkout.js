@@ -1,7 +1,10 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const state = { price: 14, currency: 'USD', max: 10, ready: false, busy: false };
+  const state = { price: 14, currency: 'USD', max: 10, ready: false, busy: false, environment: 'sandbox' };
+  const reportedOrders = new Set();
+  const startedOrders = new Set();
+  const track = (name, data, key) => { try { window.dosTrack?.(name, data, key); } catch {} };
   let retryAction = init;
   const format = (amount, currency = state.currency) => new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
   const quantity = () => Math.max(1, Math.min(state.max, parseInt($('qty').value, 10) || 1));
@@ -58,6 +61,10 @@
       $('checkout').hidden = true;
       $('receipt').hidden = false;
       $('receipt').focus();
+      if (!reportedOrders.has(result.order_id)) {
+        track('purchase_completed', { value: Number(result.amount.value), currency: result.amount.currency_code, environment: state.environment }, result.order_id);
+        reportedOrders.add(result.order_id);
+      }
     } catch (error) {
       if (error.issue === 'INSTRUMENT_DECLINED' && actions?.restart) {
         $('paypal-buttons').hidden = false;
@@ -81,6 +88,7 @@
       if (!config.product || !Number.isFinite(Number(config.product.price)) || Number(config.product.price) <= 0) throw new Error('invalid_config');
       state.price = Number(config.product.price);
       state.currency = config.currency || 'USD';
+      state.environment = config.env === 'live' ? 'live' : 'sandbox';
       state.max = Math.max(1, Math.floor(Number(config.product.maxQuantity) || 1));
       $('qty').max = state.max;
       $('p-price').textContent = format(state.price);
@@ -99,6 +107,10 @@
           try {
             const order = await request('/api/paypal/create-order', { quantity: quantity() });
             if (!order.id) throw new Error('missing_order');
+            if (!startedOrders.has(order.id)) {
+              track('checkout_started', { quantity: quantity(), environment: state.environment }, order.id);
+              startedOrders.add(order.id);
+            }
             return order.id;
           } catch (error) { lock(false); message('We could not start checkout. Please try again.'); throw error; }
         },

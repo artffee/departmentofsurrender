@@ -36,8 +36,9 @@ Connecting Resend to ChatGPT does not by itself configure Vercel's environment.
 ## Privacy and abuse controls
 
 The confirmation token encrypts the address, expires within 24 hours, and travels
-in a URL fragment. The confirmation page has no analytics, sends no referrer and
-clears the fragment immediately. A manual button prevents GET-based email scanners
+in a URL fragment. The confirmation page loads analytics only after a successful
+explicit confirmation, sends no referrer and clears the fragment immediately.
+A manual button prevents GET-based email scanners
 from signing people up. Only successful provider responses produce success UI.
 
 The API validates consent, input, size, origin and action; uses a honeypot; hashes

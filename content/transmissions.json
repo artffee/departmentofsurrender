@@ -1,0 +1,32 @@
+[
+  {
+    "id": "warning-about-words",
+    "number": "001",
+    "label": "READER NOTE 000",
+    "title": "A Warning About Words",
+    "description": "An opening note on the strange technology of words.",
+    "quote": "A book asks you to create the image yourself.",
+    "passage_html": "<p>Do not mistake this book for paper and ink.</p><p>A screen can show you a thousand images and leave nothing behind.</p><p>A book asks you to create the image yourself.</p><p>When you read the word <em>ocean</em>, there is no ocean on this page. And yet—you can see it. You can hear it. You may even smell the salt.</p><p>Write <em>coffee</em>, and somewhere inside you a cup becomes warm. Write <em>rain</em>, and an old street may suddenly become wet again. Write the name of someone you once loved—and an entire world can return.</p><p>This is the strange technology of words.</p>",
+    "source": "Opening excerpt · Before You Read"
+  },
+  {
+    "id": "productive-leisure",
+    "number": "002",
+    "label": "FILE 08-A / SECTION 08",
+    "title": "The Crime of Productive Leisure",
+    "description": "A report on what happens when even a walk needs a target.",
+    "quote": "Even sleep has become a performance review delivered each morning by a watch that did not sleep at all.",
+    "passage_html": "<p>The Department has received credible reports that citizens are optimising their rest.</p><p>You have a hobby, and the hobby has a spreadsheet. You go for a walk, and the walk has a target. You read a book faster because somewhere you absorbed the idea that books are objects to clear rather than countries in which to become temporarily lost.</p><p>Even sleep has become a performance review delivered each morning by a watch that did not sleep at all.</p>",
+    "source": "Opening excerpt · Part Three: The Weight of Time and Self"
+  },
+  {
+    "id": "the-word-enough",
+    "number": "003",
+    "label": "FILE 23-A / SECTION 23",
+    "title": "The Word the Age Removed",
+    "description": "A recovered word for an age that keeps asking for more.",
+    "quote": "The missing word is enough.",
+    "passage_html": "<p>There is a word that has quietly disappeared from circulation.</p><p>No announcement accompanied its removal. There was no ceremony, no final use recorded in the archive. You simply reached for the word one day and found another word occupying its place.</p><p>The replacement was <em>more</em>.</p><p>The missing word is <em>enough</em>.</p>",
+    "source": "Opening excerpt · Part Six: The Protocol of Enough"
+  }
+]

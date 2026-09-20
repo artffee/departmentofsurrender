@@ -58,6 +58,24 @@
         token = null;
         status.textContent = 'You’re enlisted. The Bird has made a note. Watch your inbox for the next transmission.';
         confirm.hidden = true;
+        // Load analytics only after confirmation and after removing the token
+        // from the address bar. Opening the email link alone sends no analytics.
+        try { if (typeof window.dosTrack === 'function') {
+          window.dosTrack('subscription_confirmed', {}, 'confirmed');
+        } else {
+          const bootstrap = document.createElement('script');
+          bootstrap.src = '/analytics.js';
+          bootstrap.onload = () => {
+            try {
+              window.dosTrack?.('subscription_confirmed', {}, 'confirmed');
+              const metrics = document.createElement('script');
+              metrics.src = '/_vercel/insights/script.js';
+              metrics.dataset.disableAutoTrack = '1';
+              document.head.appendChild(metrics);
+            } catch { /* Confirmation has already succeeded. */ }
+          };
+          document.head.appendChild(bootstrap);
+        } } catch { /* Analytics failure cannot change a confirmed subscription. */ }
       } catch (error) { status.textContent = error.message || 'Please try again shortly.'; confirm.disabled = false; }
     });
   }
