@@ -84,16 +84,17 @@ test('pending capture never releases the book', async () => {
   assert.equal(pending.data.capture_status, 'PENDING'); assert.equal(pending.data.downloadUrl, undefined);
 });
 async function frontend(fetcher, sdkFailure = false) {
-  const elements = new Map(); let buttonOptions;
+  const elements = new Map(); const events = []; let buttonOptions;
   const element = id => {
     if (!elements.has(id)) elements.set(id, { value: id === 'qty' ? '1' : '', hidden: id === 'receipt' || id === 'book-download', disabled: false, textContent: '', handlers: {}, addEventListener(event, fn) { this.handlers[event] = fn; }, replaceChildren() {}, focus() { this.focused = true; } });
     return elements.get(id);
   };
   const window = sdkFailure ? {} : { paypal: { Buttons(options) { buttonOptions = options; return { render: async () => {} }; } } };
+  window.dosTrack = (name, data, key) => events.push({ name, data, key });
   const document = { getElementById: element, createElement: () => ({ remove() {} }), head: { appendChild(script) { script.onerror(); } } };
   vm.runInNewContext(fs.readFileSync(require.resolve('../checkout.js'), 'utf8'), { document, window, fetch: fetcher, Intl, URL, URLSearchParams, AbortSignal, setTimeout, clearTimeout });
   await new Promise(resolve => setImmediate(resolve));
-  return { element, options: buttonOptions };
+  return { element, options: buttonOptions, events };
 }
 const readyConfig = { checkoutReady: true, clientId: 'test', currency: 'USD', env: 'sandbox', product: { price: '14.00', maxQuantity: 10 } };
 test('frontend survives unavailable, failed and malformed config, plus SDK loading failure', async () => {
@@ -111,8 +112,29 @@ test('receipt uses server amount and pending never becomes a successful purchase
   const ui = await frontend(async url => response(url.includes('client-config') ? readyConfig : { status: 'COMPLETED', capture_status: pending ? 'PENDING' : 'COMPLETED', order_id: orderID, amount: { value: '28.00', currency_code: 'USD' }, ...(pending ? {} : { downloadUrl: 'https://example.com/book.pdf' }) }));
   await ui.options.onApprove({ orderID }, {});
   assert.equal(ui.element('receipt').hidden, true); assert.equal(ui.element('book-download').hidden, true);
+  assert.equal(ui.events.length, 0);
   pending = false;
   await ui.element('retry-checkout').handlers.click();
   assert.equal(ui.element('receipt').hidden, false); assert.equal(ui.element('r-amount').textContent, 'Paid: $28.00');
   assert.equal(ui.element('book-download').hidden, false); assert.equal(ui.element('receipt').focused, true);
+  await ui.options.onApprove({ orderID }, {});
+  assert.equal(ui.events.length, 1);
+  assert.equal(ui.events[0].name, 'purchase_completed');
+  assert.equal(ui.events[0].data.value, 28);
+  assert.equal(ui.events[0].data.environment, 'sandbox');
+  assert.equal(JSON.stringify(ui.events[0].data).includes(orderID), false);
+});
+
+test('checkout starts are counted only after order creation, once per order', async () => {
+  let fail = true;
+  const ui = await frontend(async url => response(url.includes('client-config') ? readyConfig : fail ? {} : { id: orderID }));
+  await assert.rejects(ui.options.createOrder());
+  assert.equal(ui.events.length, 0);
+  fail = false;
+  assert.equal(await ui.options.createOrder(), orderID);
+  await ui.options.createOrder();
+  assert.equal(ui.events.length, 1);
+  assert.equal(ui.events[0].name, 'checkout_started');
+  assert.equal(ui.events[0].data.quantity, 1);
+  assert.equal(ui.events[0].data.environment, 'sandbox');
 });
